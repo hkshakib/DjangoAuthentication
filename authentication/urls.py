@@ -1,7 +1,9 @@
 from django.urls import path
-from rest_framework.routers import DefaultRouter
-from .views import UserViewSet, LoginView, LogoutView
 from django.contrib.auth import views as auth_views
+
+from rest_framework.routers import DefaultRouter
+
+from .views import UserViewSet, LoginView, LogoutView
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='users')
