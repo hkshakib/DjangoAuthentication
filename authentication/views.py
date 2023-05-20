@@ -5,6 +5,14 @@ from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer
 
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import PasswordResetView as DefaultPasswordResetView
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.urls import reverse
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -30,3 +38,4 @@ class LogoutView(views.APIView):
     def post(self, request):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
+
